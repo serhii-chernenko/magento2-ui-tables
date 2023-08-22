@@ -9,6 +9,7 @@ define(['uiCollection', 'uiLayout'], (uiCollection, uiLayout) => {
          */
         initialize() {
             this._super();
+            this.addCellsToRenderQueue();
             this.buildCells();
 
             return this;
@@ -17,29 +18,26 @@ define(['uiCollection', 'uiLayout'], (uiCollection, uiLayout) => {
         /**
          * Get columns that have to be rendered and find the same key in the object "row".
          * If key didn't find, set the value "-".
-         * Component has to have unique name on each render not to be cached.
-         * Use Data.now() or uuid() to generate a unique name.
          * @callback getAdditionalConfig
          * @returns {Object} This.
          */
-        async buildCells() {
+        addCellsToRenderQueue() {
+            this.cellsToRender = [];
             const { component, template } = this.components.default;
 
             for (const cell of this.columns) {
-                uiLayout([
-                    {
-                        component,
-                        template,
-                        parent: this.name,
-                        name: `cell-${cell}-${Date.now()}`,
-                        cell,
-                        value: cell in this.row ? this.row[cell] : '-',
-                        ...this.getAdditionalConfig(cell, this.row[cell]),
-                        htmlClass: `${this.tableHtmlClass}__cell`,
-                        tableHtmlClass: this.tableHtmlClass,
-                        resolution: this.resolution
-                    }
-                ]);
+                this.cellsToRender.push({
+                    component,
+                    template,
+                    parent: this.name,
+                    name: `cell-${cell}`,
+                    cell,
+                    value: cell in this.row ? this.row[cell] : '-',
+                    ...this.getAdditionalConfig(cell, this.row[cell]),
+                    htmlClass: `${this.tableHtmlClass}__cell`,
+                    tableHtmlClass: this.tableHtmlClass,
+                    resolution: this.resolution
+                });
             }
         },
 
@@ -90,6 +88,22 @@ define(['uiCollection', 'uiLayout'], (uiCollection, uiLayout) => {
             }
 
             return config;
+        },
+
+        /**
+         * Get columns that have to be rendered and find the same key in the object "row".
+         * If key didn't find, set the value "-".
+         * Component has to have unique name on each render not to be cached.
+         * Use Data.now() or uuid() to generate a unique name.
+         * @callback getAdditionalConfig
+         * @returns {Object} This.
+         */
+        buildCells() {
+            if (!this.cellsToRender.length) {
+                return this;
+            }
+
+            uiLayout(this.cellsToRender);
         }
     });
 });

@@ -19,6 +19,9 @@ define(['uiCollection', 'uiLayout', 'mage/translate'], (
                 hideActionsColumnLabel: true,
                 sortBy: true,
                 sortDirection: true
+            },
+            modules: {
+                parentComponent: '${ $.provider }'
             }
         },
 
@@ -81,6 +84,8 @@ define(['uiCollection', 'uiLayout', 'mage/translate'], (
          * @returns {Object} This.
          */
         filterRows() {
+            this.rowsToRender = [];
+
             for (const item of this.items) {
                 const renderedItem = this.prepareItemColumns(item);
                 let filter = true;
@@ -97,9 +102,10 @@ define(['uiCollection', 'uiLayout', 'mage/translate'], (
                     break;
                 }
 
-                !filter && this.buildRow(item.id, renderedItem);
+                !filter && this.addRowToRenderQueue(renderedItem);
             }
 
+            this.buildRows();
             this.showDebugData();
         },
 
@@ -169,26 +175,35 @@ define(['uiCollection', 'uiLayout', 'mage/translate'], (
          * Render child components (rows).
          * Component has to have unique name on each render not to be cached.
          * Use Data.now() or uuid() to generate a unique name.
-         * @param {number} key - Index of a row that has to be rendered.
-         * @param {Object} row - Row that has to be rendered.
+         * @param {Object} item - Item that has to be rendered.
          * @returns {Object} This.
          */
-        buildRow(key, row) {
-            uiLayout([
-                {
-                    component: this.components.row.component,
-                    template: this.components.row.template,
-                    parent: this.name,
-                    name: `row-${key}-${Date.now()}`,
-                    row,
-                    components: this.components.cell,
-                    columns: this.renderedColumns,
-                    resolution: this.resolution,
-                    detailsColumnLabel: this.detailsColumnLabel,
-                    htmlClass: `${this.htmlClass}__row`,
-                    tableHtmlClass: this.htmlClass
-                }
-            ]);
+        addRowToRenderQueue(item) {
+            this.rowsToRender.push({
+                component: this.components.row.component,
+                template: this.components.row.template,
+                parent: this.name,
+                name: `row-${item.id}-${Date.now()}`,
+                row: item,
+                components: this.components.cell,
+                columns: this.renderedColumns,
+                resolution: this.resolution,
+                detailsColumnLabel: this.detailsColumnLabel,
+                htmlClass: `${this.htmlClass}__row`,
+                tableHtmlClass: this.htmlClass
+            });
+        },
+
+        /**
+         * Render child components (rows).
+         * @returns {Object} This.
+         */
+        buildRows() {
+            if (!this.rowsToRender.length) {
+                return this;
+            }
+
+            uiLayout(this.rowsToRender);
         },
 
         /**

@@ -59,3 +59,11 @@
         </div>
     <!-- /ko -->
 </div>
+<div data-bind="class: `${htmlClass}__buttons`">
+    <button class="action secondary"
+            data-bind="
+                click: function() { $parent.buildApp() },
+                i18n: 'Reload'
+            "
+    ></button>
+</div>

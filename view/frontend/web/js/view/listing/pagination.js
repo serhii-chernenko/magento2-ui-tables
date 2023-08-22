@@ -13,13 +13,15 @@ define([
             isNextButtonVisible: false,
             Pagination,
             links: {
-                skip: '${ $.provider }:skip'
+                skip: '${ $.provider }:skip',
+                limit: '${ $.provider }:limit'
             },
             tracks: {
                 pagination: true,
                 isPrevButtonVisible: true,
                 isNextButtonVisible: true,
-                skip: true
+                skip: true,
+                limit: true
             }
         },
 
@@ -37,8 +39,14 @@ define([
         },
 
         setPages() {
-            this.page = Math.floor(this.skip / this.limit) + 1;
-            this.pages = Math.ceil(this.total / this.limit);
+            const lastPage =
+                this.limit < this.initialLimit &&
+                this.skip + this.limit === this.total &&
+                this.skip > this.limit;
+
+            this.page = Math.floor(this.skip / this.limit) + (lastPage ? 0 : 1);
+            this.pages =
+                Math.ceil(this.total / this.limit) - (lastPage ? 1 : 0);
         },
 
         /**
@@ -169,6 +177,10 @@ define([
          * @returns {Object} This.
          */
         goToPage(page) {
+            if (page < this.pages && this.limit < this.initialLimit) {
+                this.limit = this.initialLimit;
+            }
+
             this.skip = (page - 1) * this.limit;
         }
     });
