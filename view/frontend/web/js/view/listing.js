@@ -265,7 +265,6 @@ define([
         },
 
         renderChildrenComponents() {
-            console.log('renderChildrenComponents', this.componentsToRender);
             uiLayout(this.componentsToRender);
         },
 
