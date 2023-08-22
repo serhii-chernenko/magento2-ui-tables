@@ -7,7 +7,7 @@ namespace Chernenko\Tables\Controller\Listing;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\View\Result\PageFactory;
 
-class Demo implements HttpGetActionInterface
+class Index implements HttpGetActionInterface
 {
     public function __construct(
         private readonly PageFactory $pageFactory
