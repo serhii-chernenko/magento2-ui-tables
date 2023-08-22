@@ -167,6 +167,8 @@ define(['uiCollection', 'uiLayout', 'mage/translate'], (
 
         /**
          * Render child components (rows).
+         * Component has to have unique name on each render not to be cached.
+         * Use Data.now() or uuid() to generate a unique name.
          * @param {number} key - Index of a row that has to be rendered.
          * @param {Object} row - Row that has to be rendered.
          * @returns {Object} This.
@@ -177,7 +179,7 @@ define(['uiCollection', 'uiLayout', 'mage/translate'], (
                     component: this.components.row.component,
                     template: this.components.row.template,
                     parent: this.name,
-                    name: `row-${key}`,
+                    name: `row-${key}-${Date.now()}`,
                     row,
                     components: this.components.cell,
                     columns: this.renderedColumns,

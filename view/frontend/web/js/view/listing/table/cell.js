@@ -3,7 +3,6 @@ define(['uiElement'], (uiElement) => {
 
     return uiElement.extend({
         defaults: {
-            template: 'Chernenko_Tables/listing/table/cell/default',
             selectedAction: null,
             tracks: {
                 selectedAction: true

@@ -17,10 +17,12 @@ define(['uiCollection', 'uiLayout'], (uiCollection, uiLayout) => {
         /**
          * Get columns that have to be rendered and find the same key in the object "row".
          * If key didn't find, set the value "-".
+         * Component has to have unique name on each render not to be cached.
+         * Use Data.now() or uuid() to generate a unique name.
          * @callback getAdditionalConfig
          * @returns {Object} This.
          */
-        buildCells() {
+        async buildCells() {
             const { component, template } = this.components.default;
 
             for (const cell of this.columns) {
@@ -29,7 +31,7 @@ define(['uiCollection', 'uiLayout'], (uiCollection, uiLayout) => {
                         component,
                         template,
                         parent: this.name,
-                        name: `cell-${cell}`,
+                        name: `cell-${cell}-${Date.now()}`,
                         cell,
                         value: cell in this.row ? this.row[cell] : '-',
                         ...this.getAdditionalConfig(cell, this.row[cell]),
