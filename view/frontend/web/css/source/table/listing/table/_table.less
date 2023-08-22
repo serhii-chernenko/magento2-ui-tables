@@ -1,0 +1,121 @@
+//
+//  Common
+//  ---------------------------------------------
+
+& when (@media-common = true) {
+
+    @{ui-listing__table__selector} {
+        width: 100%;
+        margin-bottom: 20px;
+
+        &__sort {
+            display: flex;
+            align-items: center;
+            padding: 0;
+            border: unset;
+            background: unset;
+
+            &:hover,
+            &:focus,
+            &:active {
+                border: unset;
+                background: unset;
+            }
+
+            &__label {
+                margin-right: 4px;
+            }
+
+            &__arrows {
+                @_arrow-color: #000;
+                @_arrow-color--selected: #ddd;
+                @_arrow-size: 4px;
+
+                display: flex;
+                flex-direction: column;
+
+                &::before,
+                &::after {
+                    content: '';
+                }
+
+                &::before {
+                    .lib-arrow(up, @_arrow-size, @_arrow-color);
+                    margin-bottom: 1px;
+                }
+
+                &::after {
+                    .lib-arrow(down, @_arrow-size, @_arrow-color);
+                    margin-top: 1px;
+                }
+
+                &.is-selected {
+                    &.is-asc {
+                        &::before {
+                            .lib-arrow(up, @_arrow-size, @_arrow-color--selected);
+                        }
+                    }
+
+                    &.is-desc {
+                        &::after {
+                            .lib-arrow(down, @_arrow-size, @_arrow-color--selected);
+                        }
+                    }
+                }
+            }
+        }
+
+        &__row {
+            &--thead {
+                font-weight: @font-weight__bold;
+            }
+        }
+
+        th span.is-hidden {
+            .lib-visibility-hidden();
+        }
+
+        &__cell {
+            &--details,
+            &--actions {
+                a {
+                    .lib-font-size(11px);
+                    .lib-line-height(15px);
+                    letter-spacing: .8px;
+                    font-weight: @font-weight__heavier;
+                    text-transform: uppercase;
+                    text-decoration: underline;
+
+                    &:focus-visible {
+                        outline: -webkit-focus-ring-color auto 1px;
+                    }
+                }
+            }
+        }
+
+        &__actions-select {
+            min-width: 100px;
+        }
+    }
+
+}
+
+//
+//  Desktop
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+    @{ui-listing__table__selector} {
+        &__cell {
+            &--details,
+            &--actions {
+                a:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
+}
+

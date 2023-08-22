@@ -1,0 +1,52 @@
+//
+//  Imports
+//  ---------------------------------------------
+
+@import 'listing/_message.less';
+@import 'listing/_search.less';
+@import 'listing/table/_mixins.less';
+@import 'listing/table/_general.less';
+@import 'listing/table/_table.less';
+@import 'listing/_amount.less';
+@import 'listing/_pagination.less';
+
+//
+//  Variables
+//  ---------------------------------------------
+
+@ui-listing__selector: ~'.ui-listing';
+
+//
+//  Common
+//  ---------------------------------------------
+
+& when (@media-common = true) {
+
+    @{ui-listing__selector} {
+        overflow-x: auto;
+        padding-bottom: @indent__s;
+    }
+
+}
+
+//
+//  Desktop
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+    @{ui-listing__selector} {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        &__container {
+            width: 50%;
+
+            &--general {
+                width: 100%;
+            }
+        }
+    }
+
+}

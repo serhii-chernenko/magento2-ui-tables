@@ -1,0 +1,11 @@
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp:etc/csp_whitelist.xsd">
+        <policies>
+            <policy id="connect-src">
+                <values>
+                    <value id="livereload" type="host">ws://127.0.0.1:35729/livereload</value>
+                    <value id="dummyjson" type="host">https://dummyjson.com</value>
+                </values>
+            </policy>
+        </policies>
+</csp_whitelist>

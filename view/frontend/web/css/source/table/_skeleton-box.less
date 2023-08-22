@@ -1,0 +1,61 @@
+//
+//  Variables
+//  ---------------------------------------------
+
+@ui-listing__skeleton-box__selector: ~'.ui-listing__skeleton-box';
+@ui-listing__skeleton-box__background-color--default: #f1f1f1;
+@ui-listing__skeleton-box__background-color--white: #fff;
+
+//
+//  Common
+//  ---------------------------------------------
+
+& when (@media-common = true) {
+
+    @{ui-listing__skeleton-box__selector} {
+        width: 70%;
+        min-width: 30px;
+        max-width: 173px;
+        height: 20px;
+        //border-radius: @od-table__border-radius;
+        background-color: @ui-listing__skeleton-box__background-color--default;
+        background: linear-gradient(
+            100deg,
+            rgba(255, 255, 255, 0) 40%,
+            rgba(255, 255, 255, .5) 50%,
+            rgba(255, 255, 255, 0) 60%
+        ) @ui-listing__skeleton-box__background-color--default;
+        background-size: 200% 100%;
+        background-position-x: 180%;
+        animation: 1s ui-listing-listing-skeleton ease-in-out infinite;
+
+        &--white {
+            background-color: @ui-listing__skeleton-box__background-color--white;
+            background: linear-gradient(
+                100deg,
+                rgba(244, 242, 240, 0) 40%,
+                rgba(244, 242, 240, .5) 50%,
+                rgba(244, 242, 240, 0) 60%
+            ) @ui-listing__skeleton-box__background-color--white;
+            background-size: 200% 100%;
+            background-position-x: 180%;
+        }
+
+        &--short {
+            width: 30px;
+            margin: 0 auto;
+        }
+
+        &--medium {
+            width: 100px;
+            max-width: 70%;
+        }
+    }
+
+    @keyframes ui-listing-listing-skeleton {
+        to {
+            background-position-x: -20%;
+        }
+    }
+
+}

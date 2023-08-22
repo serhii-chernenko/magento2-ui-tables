@@ -1,0 +1,9 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
+      layout="1column"
+>
+    <update handle="table_listing_demo"/>
+    <body>
+        <move element="table.listing.demo" destination="content" before="-"/>
+    </body>
+</page>

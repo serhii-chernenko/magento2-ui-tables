@@ -1,0 +1,37 @@
+<div data-bind="class: htmlClass">
+    <div data-bind="
+            foreach: getRegion('top-left'),
+            class: `${htmlClass}__container ${htmlClass}__container--left`
+         "
+    >
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+    <div data-bind="
+            foreach: getRegion('top-right'),
+            class: `${htmlClass}__container ${htmlClass}__container--right`
+         "
+    >
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+    <div data-bind="
+            foreach: getRegion('general'),
+            class: `${htmlClass}__container ${htmlClass}__container--general`
+         "
+    >
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+    <div data-bind="
+            foreach: getRegion('bottom-left'),
+            class: `${htmlClass}__container ${htmlClass}__container--left`
+         "
+    >
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+    <div data-bind="
+            foreach: getRegion('bottom-right'),
+            class: `${htmlClass}__container ${htmlClass}__container--right`
+         "
+    >
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+</div>

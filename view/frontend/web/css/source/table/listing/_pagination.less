@@ -1,0 +1,82 @@
+//
+//  Variables
+//  ---------------------------------------------
+
+@ui-listing__pagination__selector: ~'.ui-listing__pagination';
+
+//
+//  Common
+//  ---------------------------------------------
+
+& when (@media-common = true) {
+
+    @{ui-listing__pagination__selector} {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+
+        button {
+            &.action,
+            &.page {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0 4px;
+                background: unset;
+                .lib-font-size(14px);
+                line-height: 1;
+                color: @theme__color__primary;
+            }
+
+            &.page {
+                border: unset;
+            }
+
+            &.action {
+                @_size: 40px;
+
+                width: @_size;
+                height: @_size;
+
+                &.previous,
+                &.next {
+                    &::before {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 0;
+                        .lib-font-size(32px);
+                    }
+                }
+            }
+        }
+
+        .item {
+            margin: 0 8px 8px 0;
+
+            &.current {
+                .page {
+                    padding: 0 4px;
+                    .lib-font-size(14px);
+                    line-height: 1;
+                    color: @color-black;
+                }
+            }
+        }
+    }
+
+}
+
+//
+//  Mobile
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+
+    @{ui-listing__pagination__selector} {
+        margin-top: @indent__base;
+        justify-content: center;
+    }
+
+}

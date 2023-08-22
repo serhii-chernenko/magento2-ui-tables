@@ -1,0 +1,61 @@
+<div data-bind="
+        css: { 'has-sort': sortBy, [`${htmlClass}--desktop`]: resolution === 'desktop' },
+        class: htmlClass
+     "
+>
+    <div data-bind="class: `${htmlClass}__row ${htmlClass}__row--thead`">
+        <!-- ko foreach: { data: renderedColumns, as: 'column', noChildContext: true } -->
+            <div data-bind="
+                    class: `${htmlClass}__cell ${htmlClass}__cell--thead ${htmlClass}__cell--${column} ${columns[column].additionalHtmlClasses ?? ''}`
+                 "
+            >
+                <!-- ko if: column !== 'actions' || (!hideActionsColumnLabel && column === 'actions') -->
+                    <!-- ko if: columns[column].sortable -->
+                        <button data-bind="
+                                    click: function () { sortByClick(column) },
+                                    class: `${htmlClass}__sort`
+                                "
+                        >
+                            <!-- ko if: resolution === 'mobile' && columns[column].labelMobile -->
+                                <span data-bind="
+                                        text: columns[column].labelMobile,
+                                        class: `${htmlClass}__sort__label`
+                                      "
+                                ></span>
+                            <!-- /ko -->
+                            <!-- ko ifnot: resolution === 'mobile' && columns[column].labelMobile -->
+                                <span data-bind="
+                                        text: columns[column].label,
+                                        class: `${htmlClass}__sort__label`
+                                      "
+                                ></span>
+                            <!-- /ko -->
+                            <span class="tables-ui-sort__arrows"
+                                  data-bind="
+                                      css: {
+                                          'is-selected': column === sortBy,
+                                          'is-asc': sortDirection === 'ASC',
+                                          'is-desc': sortDirection === 'DESC'
+                                      },
+                                      class: `${htmlClass}__sort__arrows`
+                                  "
+                            ></span>
+                        </button>
+                    <!-- /ko -->
+                    <!-- ko ifnot: columns[column].sortable -->
+                        <span data-bind=" text: columns[column].label"></span>
+                    <!-- /ko -->
+                <!-- /ko -->
+            </div>
+        <!-- /ko -->
+    </div>
+    <!-- ko foreach: elems -->
+        <div data-bind="
+                class: `${htmlClass} ${htmlClass}--tbody`,
+                css: { [`${htmlClass}--gray`]: $index() % 2 !== 1 }
+             "
+        >
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        </div>
+    <!-- /ko -->
+</div>

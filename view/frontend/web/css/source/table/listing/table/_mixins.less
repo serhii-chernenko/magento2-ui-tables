@@ -1,0 +1,61 @@
+//
+//  Variables
+//  ---------------------------------------------
+
+@ui-listing__table__border-color: #e6ebee;
+@ui-listing__table__border: 1px solid @ui-listing__table__border-color;
+
+//
+//  Mixins
+//  ---------------------------------------------
+
+@ui-listing__table: {
+    display: table;
+    width: 100%;
+
+    &__row {
+        display: table-row;
+        width: 100%;
+        border-bottom: @ui-listing__table__border;
+
+        &--gray {
+            background: #f5f5f5;
+        }
+    }
+
+    &__cell {
+        display: table-cell;
+        vertical-align: middle;
+        padding: 4px;
+
+        &--thead {
+            border-top: @ui-listing__table__border;
+            border-bottom: @ui-listing__table__border;
+            background: unset;
+        }
+
+        &--tbody {
+            border-bottom: @ui-listing__table__border;
+        }
+
+        &--thead,
+        &--tbody {
+            &:first-child {
+                border-left: @ui-listing__table__border;
+            }
+
+            &:last-child {
+                border-right: @ui-listing__table__border;
+            }
+        }
+    }
+};
+
+@ui-listing__table--desktop: {
+    // add separated desktop styles here
+};
+
+@ui-listing__table--mobile: {
+    // add separated mobile styles here
+};
+

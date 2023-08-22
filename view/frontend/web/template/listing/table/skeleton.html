@@ -1,0 +1,43 @@
+<div data-bind="
+        class: htmlClass,
+        css: { [`${htmlClass}--desktop`]: resolution === 'desktop' }
+     "
+>
+    <div data-bind="class: `${htmlClass}__row ${htmlClass}__row--thead`">
+        <!-- ko foreach: { data: renderedColumns, as: 'column', noChildContext: true } -->
+            <!-- ko if: resolution === 'desktop' || (resolution === 'mobile' && !columns[column].hideOnMobile) -->
+                <div data-bind="
+                        class: `${htmlClass}__cell ${htmlClass}__cell--thead ${htmlClass}__cell--${column} ${columns[column].additionalHtmlClasses ?? ''}`
+                     "
+                >
+                    <!-- ko ifnot: columns[column].hideLabelMobile -->
+                        <div data-bind=" class: `${rootHtmlClass}__skeleton-box ${rootHtmlClass}__skeleton-box--medium`"></div>
+                    <!-- /ko -->
+                </div>
+            <!-- /ko -->
+        <!-- /ko -->
+    </div>
+    <!-- ko foreach: { data: Array(rows), as: 'row', noChildContext: true } -->
+        <div data-bind="
+                class: `${htmlClass}__row ${htmlClass}__row--tbody`,
+                css: { [`${htmlClass}__row--gray`]: $index() % 2 !== 1 }
+             "
+        >
+            <!-- ko foreach: { data: renderedColumns, as: 'column', noChildContext: true } -->
+                <!-- ko if: resolution === 'desktop' || (resolution === 'mobile' && !columns[column].hideOnMobile) -->
+                    <div data-bind="
+                        attr: {
+                            'data-cell': column,
+                            class: `${htmlClass}__cell ${htmlClass}__cell--tbody ${htmlClass}__cell--${column}`
+                        }
+                    ">
+                        <div data-bind="
+                            class: `${rootHtmlClass}__skeleton-box ${rootHtmlClass}__skeleton-box--short`,
+                            css: { [`${rootHtmlClass}__skeleton-box--white`]: rowIndex() % 2 !== 1 }
+                        "></div>
+                    </div>
+                <!-- /ko -->
+            <!-- /ko -->
+        </div>
+    <!-- /ko -->
+</div>

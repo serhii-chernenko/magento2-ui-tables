@@ -1,0 +1,45 @@
+//
+//  Variables
+//  ---------------------------------------------
+
+@ui-listing__skeleton-table__selector: ~'.ui-listing__skeleton-table';
+@ui-listing__table__selector: ~'.ui-listing__table';
+
+//
+//  Common
+//  ---------------------------------------------
+
+& when (@media-common = true) {
+
+    @{ui-listing__skeleton-table__selector},
+    @{ui-listing__table__selector} {
+        @ui-listing__table();
+    }
+
+}
+
+//
+//  Mobile
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+
+    @{ui-listing__skeleton-table__selector},
+    @{ui-listing__table__selector} {
+        @ui-listing__table--mobile();
+    }
+
+}
+
+//
+//  Desktop
+//  ---------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+    @{ui-listing__skeleton-table__selector},
+    @{ui-listing__table__selector} {
+        @ui-listing__table--desktop();
+    }
+
+}

@@ -1,0 +1,50 @@
+<!-- ko if: pagination.length -->
+    <div class="pager" data-bind="class: htmlClass">
+        <div class="pages">
+            <ul class="items pages-items">
+                <!-- ko if: isPrevButtonVisible -->
+                    <li class="item pages-item-previous">
+                        <button class="action previous" data-bind="click: goToPrevPage">
+                            <span data-bind="i18n: 'Previous'"/>
+                        </button>
+                    </li>
+                <!-- /ko -->
+                <!-- ko foreach: { data: pagination, as: 'item', noChildContext: true } -->
+                    <li class="item" data-bind="css: { current: Pagination.isCurrent(item, page) }">
+                        <!-- ko ifnot: Pagination.isCTA(item, page) -->
+                            <strong class="page"
+                                    data-bind="css: {
+                                        first: Pagination.isFirst(item),
+                                        last: Pagination.isLast(item, pages),
+                                        jump: Pagination.isJump(item)
+                                    }"
+                            >
+                                <span data-bind="text: Pagination.getLabel(item)"/>
+                            </strong>
+                        <!-- /ko -->
+                        <!-- ko if: Pagination.isCTA(item, page) -->
+                            <button class="page"
+                               data-bind="
+                                   click: function () { goToPage(item) },
+                                   css: {
+                                       first: Pagination.isFirst(item),
+                                       last: Pagination.isLast(item, pages)
+                                   }
+                               "
+                            >
+                                <span data-bind="text: Pagination.getLabel(item)"/>
+                            </button>
+                        <!-- /ko -->
+                    </li>
+                <!-- /ko -->
+                <!-- ko if: isNextButtonVisible -->
+                    <li class="item pages-item-next">
+                        <button class="action next" data-bind="click: goToNextPage">
+                            <span data-bind="i18n: 'Next'"/>
+                        </button>
+                    </li>
+                <!-- /ko -->
+            </ul>
+        </div>
+    </div>
+<!-- /ko -->

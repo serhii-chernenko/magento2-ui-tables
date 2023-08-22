@@ -1,0 +1,12 @@
+<div data-bind="class: htmlClass">
+    <div data-bind="attr: { class: 'message ' + message.type }">
+        <div class="text" data-bind="text: message.text"></div>
+    </div>
+    <button class="action primary"
+            data-bind="
+                click: reset,
+                i18n: 'Reset',
+                class: `${htmlClass}__reset`
+            "
+    ></button>
+</div>

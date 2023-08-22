@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @var Chernenko\Tables\Block\Listing $block
+ * @var Magento\Framework\Escaper $escaper
+ */
+
+$scope = $block->getData('scope');
+?>
+<p>Repo:</p>
+<p>
+    <a href="https://github.com/serhii-chernenko/magento2-ui-tables" target="_blank">
+        <strong>https://github.com/serhii-chernenko/magento2-ui-tables</strong>
+    </a>
+</p>
+<hr/>
+<div data-mage-init='{"Magento_Ui/js/core/app": <?= $block->getJsLayout(); ?>}'
+     data-bind="scope: '<?= $scope; ?>'"
+>
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
