@@ -12,8 +12,7 @@ jobs:
       - name: Run a build command
         uses: dawidd6/action-ansible-playbook@v2
         with:
-          playbook: ${{ github.workspace }}/.ansible/main.yml
-          verbosity: 4
+          playbook: ${{ runner.workspace }}/.ansible/main.yml
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           inventory: ${{ secrets.INVENTORY }}
           options: |
