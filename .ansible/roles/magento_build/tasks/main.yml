@@ -1,0 +1,42 @@
+- name: Run Magento build
+  hosts: localhost
+  become: yes
+  become_user: admin
+  vars:
+    dir: "{{ VPS_APP_PATH }}"
+    log_file: "{{ dir }}/var/log/build.log"
+    m2: "madock magento"
+    build_commands:
+      - maintenance:enable
+      - setup:upgrade
+      - setup:di:compile
+      - setup:static-content:deploy
+      - cache:flush
+      - maintenance:disable
+
+  tasks:
+    - name: Clear log file
+      file:
+        path: "{{ log_file }}"
+        state: absent
+
+    - name: Recreate log file
+      file:
+        path: "{{ log_file }}"
+        state: touch
+        mode: '0666'
+
+    - name: Run build commands and log output
+      block:
+        - name: Run build command
+          ansible.builtin.shell:
+            cmd: "{{ m2 }} {{ item }}"
+            chdir: "{{ dir }}"
+          register: cmd_output
+        - name: Copy output to log file
+          copy:
+            content: "{{ cmd_output.stdout_lines | join('\n') }}\n"
+            dest: "{{ log_file }}"
+            remote_src: yes
+            mode: '0666'
+      loop: "{{ build_commands }}"

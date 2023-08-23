@@ -1,0 +1,20 @@
+name: Deploy Chernenko_Tables module on VPS
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a build command
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: .ansible/main.yml
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          inventory: ${{ secrets.INVENTORY }}
+          options: |
+            -e GITHUB_REPO=${{ github.repository }}
+            -e VPS_APP_PATH=/home/admin/apps/m246

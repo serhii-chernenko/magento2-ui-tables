@@ -1,0 +1,6 @@
+- name: Deploy the Chernenko_Tables module on VPS
+  hosts: all
+  remote_user: root
+  roles:
+    - git_pull
+    - magento_build
