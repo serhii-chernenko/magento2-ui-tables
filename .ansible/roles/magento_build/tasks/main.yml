@@ -16,10 +16,11 @@
         cmd: "{{ m2 }} {{ item }}"
         chdir: "{{ dir }}"
       register: cmd_output
+      loop: "{{ build_commands }}"
+
     - name: Copy output to log file
       copy:
-        content: "{{ cmd_output.stdout_lines | join('\n') }}\n"
+        content: "{{ cmd_output.results | map(attribute='stdout') | join('\n') }}\n"
         dest: "{{ log_file }}"
         remote_src: yes
         mode: '0666'
-  loop: "{{ build_commands }}"
