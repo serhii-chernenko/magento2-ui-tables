@@ -6,7 +6,7 @@
   vars:
     dir: "{{ VPS_APP_PATH }}"
     log_file: "{{ dir }}/var/log/build.log"
-    m2: "madock magento"
+    m2: "/usr/local/bin/madock magento"
     build_commands:
       - maintenance:enable
       - setup:upgrade
