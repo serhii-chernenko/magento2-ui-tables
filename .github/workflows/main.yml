@@ -12,14 +12,9 @@ jobs:
       - name: Run a build command
         uses: dawidd6/action-ansible-playbook@v2
         with:
-          playbook: main.yml
-          directory: $GITHUB_WORKSPACE/.ansible
+          playbook: ${{ github.workspace }}/.ansible/main.yml
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           inventory: ${{ secrets.INVENTORY }}
           options: |
             -e GITHUB_REPO=${{ github.repository }}
             -e VPS_APP_PATH=/home/admin/apps/m246
-            -e github_workspace=${{ github.workspace }}
-            -e GITHUB_WORKSPACE=$GITHUB_WORKSPACE
-            -e runner_workspace=${{ runner.workspace }}
-            -e RUNNER_WORKSPACE=$RUNNER_WORKSPACE
