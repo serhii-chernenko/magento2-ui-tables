@@ -1,5 +1,4 @@
 - name: Run Magento build
-  hosts: localhost
   become: yes
   become_user: admin
   vars:
