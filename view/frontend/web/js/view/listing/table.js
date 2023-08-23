@@ -10,15 +10,9 @@ define(['uiCollection', 'uiLayout', 'mage/translate'], (
             template: 'Chernenko_Tables/listing/table',
             detailsColumnLabel: $t('View'), // Label of link in "Details" column. Can be overridden in XML.
             hideActionsColumnLabel: false,
-            links: {
-                sortBy: '${ $.provider }:sortBy',
-                sortDirection: '${ $.provider }:sortDirection'
-            },
             tracks: {
                 renderedColumns: true,
-                hideActionsColumnLabel: true,
-                sortBy: true,
-                sortDirection: true
+                hideActionsColumnLabel: true
             },
             modules: {
                 parentComponent: '${ $.provider }'
@@ -214,12 +208,18 @@ define(['uiCollection', 'uiLayout', 'mage/translate'], (
          */
         sortByClick(column) {
             if (this.sortBy === column) {
-                this.sortDirection =
-                    this.sortDirection === 'ASC' ? 'DESC' : 'ASC';
+                this.parentComponent().set(
+                    'sortDirection',
+                    this.parentComponent().get('sortDirection') === 'ASC'
+                        ? 'DESC'
+                        : 'ASC'
+                );
             } else {
-                this.sortDirection = 'ASC';
-                this.sortBy = column;
+                this.parentComponent().set('sortDirection', 'ASC');
+                this.parentComponent().set('sortBy', column);
             }
+
+            this.parentComponent().fetchData();
         }
     });
 });

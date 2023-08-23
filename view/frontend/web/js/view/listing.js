@@ -353,6 +353,8 @@ define([
                 htmlClass: `${this.htmlClass}__table`,
                 rootHtmlClass: this.htmlClass,
                 resolution: this.resolution,
+                sortBy: this.sortBy,
+                sortDirection: this.sortDirection,
                 debug: this.debug
             });
         },
