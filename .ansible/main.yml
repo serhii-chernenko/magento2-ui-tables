@@ -3,6 +3,8 @@
   remote_user: root
   become: yes
   become_user: admin
+  environment:
+    PATH: "/home/admin/tools/madock:{{ ansible_env.PATH }}"
   vars:
     dir: "{{ VPS_APP_PATH }}"
     log_file: "{{ dir }}/var/log/build.log"
