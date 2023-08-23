@@ -25,7 +25,7 @@
                                     <item name="showAllPagesWhenLessThan" xsi:type="number">5</item>
                                 </item>
                             </item>
-                            <item name="limit" xsi:type="number">10</item>
+                            <item name="limit" xsi:type="number">7</item>
                             <item name="columns" xsi:type="array">
                                 <item name="title" xsi:type="array">
                                     <item name="label" xsi:type="string" translate="true">Title</item>

@@ -101,11 +101,6 @@ define([
             initialLimit: '${ $.limit } ',
             total: 0,
             skip: 0,
-            listens: {
-                sortBy: 'onParamsUpdate',
-                sortDirection: 'onParamsUpdate',
-                skip: 'onParamsUpdate'
-            },
             tracks: {
                 isLoading: true,
                 resolution: true
@@ -126,9 +121,15 @@ define([
 
         initialize() {
             this._super();
+            this.fixXmlNumberBug();
             this.mediaCheck();
 
             return this;
+        },
+
+        fixXmlNumberBug() {
+            this.initialLimit = parseInt(this.initialLimit);
+            this.limit = parseInt(this.limit);
         },
 
         mediaCheck() {
@@ -201,10 +202,6 @@ define([
             this.set('sortDirection', 'ASC');
             this.set('skip', 0);
             this.set('limit', parseInt(this.initialLimit));
-        },
-
-        onParamsUpdate() {
-            this.fetchData();
         },
 
         async fetchData(
@@ -377,8 +374,8 @@ define([
                 ...this.components.pagination,
                 parent: this.name,
                 provider: this.name,
-                initialLimit: this.initialLimit,
-                limit: this.initialLimit,
+                initialLimit: parseInt(this.initialLimit),
+                limit: parseInt(this.initialLimit),
                 skip: this.skip,
                 total: this.total,
                 htmlClass: `${this.htmlClass}__pagination`,

@@ -12,41 +12,17 @@ define([
             isPrevButtonVisible: false,
             isNextButtonVisible: false,
             Pagination,
-            links: {
-                skip: '${ $.provider }:skip',
+            imports: {
                 limit: '${ $.provider }:limit'
             },
             tracks: {
                 pagination: true,
                 isPrevButtonVisible: true,
-                isNextButtonVisible: true,
-                skip: true,
-                limit: true
+                isNextButtonVisible: true
+            },
+            modules: {
+                parentComponent: '${ $.provider }'
             }
-        },
-
-        /**
-         * Default initialize method.
-         * @callback _super
-         * @callback setPages
-         * @returns {Object} This.
-         */
-        initObservables() {
-            this._super();
-            this.setPages();
-
-            return this;
-        },
-
-        setPages() {
-            const lastPage =
-                this.limit < this.initialLimit &&
-                this.skip + this.limit === this.total &&
-                this.skip > this.limit;
-
-            this.page = Math.floor(this.skip / this.limit) + (lastPage ? 0 : 1);
-            this.pages =
-                Math.ceil(this.total / this.limit) - (lastPage ? 1 : 0);
         },
 
         /**
@@ -61,6 +37,18 @@ define([
             this.createPagination();
 
             return this;
+        },
+
+        setPages() {
+            const lastPage =
+                this.limit < this.initialLimit &&
+                this.skip + this.limit === this.total &&
+                this.skip > this.limit;
+
+            this.page = Math.floor(this.skip / this.initialLimit) + 1;
+            this.pages = lastPage
+                ? this.page
+                : Math.ceil(this.total / this.limit);
         },
 
         /**
@@ -178,10 +166,14 @@ define([
          */
         goToPage(page) {
             if (page < this.pages && this.limit < this.initialLimit) {
-                this.limit = this.initialLimit;
+                this.parentComponent().set(
+                    'limit',
+                    this.parentComponent().get('initialLimit')
+                );
             }
 
-            this.skip = (page - 1) * this.limit;
+            this.parentComponent().set('skip', (page - 1) * this.limit);
+            this.parentComponent().fetchData();
         }
     });
 });
