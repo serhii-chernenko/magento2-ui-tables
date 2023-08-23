@@ -7,7 +7,7 @@
     PATH: "/home/admin/tools/madock:{{ ansible_env.PATH }}"
   vars:
     dir: "{{ VPS_APP_PATH }}"
-    log_file: "{{ dir }}/var/log/build.log"
+    log_file: "{{ dir }}/var/log/build.txt"
     m2: "madock magento"
     build_commands:
       - maintenance:enable
