@@ -19,8 +19,7 @@ jobs:
       - name: Run a build command
         uses: dawidd6/action-ansible-playbook@v2
         with:
-          playbook: main.yml
-          directory: .ansible
+          playbook: .ansible/main.yml
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           inventory: |
             [all]
