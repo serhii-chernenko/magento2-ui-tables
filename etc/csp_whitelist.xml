@@ -3,7 +3,6 @@
         <policies>
             <policy id="connect-src">
                 <values>
-                    <value id="livereload" type="host">ws://127.0.0.1:35729/livereload</value>
                     <value id="dummyjson" type="host">https://dummyjson.com</value>
                 </values>
             </policy>
