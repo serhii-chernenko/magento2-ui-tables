@@ -336,6 +336,7 @@ define([
                 parent: this.name,
                 provider: this.name,
                 prevValue: this.search,
+                inputDelay: parseInt(this.components.search.inputDelay), // fix XML number bug
                 value: this.search,
                 htmlClass: `${this.htmlClass}__search`
             });
@@ -380,6 +381,9 @@ define([
                 limit: parseInt(this.initialLimit),
                 skip: this.skip,
                 total: this.total,
+                showAllPagesWhenLessThan: parseInt(
+                    this.components.pagination.showAllPagesWhenLessThan
+                ), // fix XML number bug
                 htmlClass: `${this.htmlClass}__pagination`,
                 resolution: this.resolution
             });
