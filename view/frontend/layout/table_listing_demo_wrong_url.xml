@@ -1,0 +1,23 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <block name="table.listing.demo.wrong.url"
+               class="Chernenko\Tables\Block\Listing"
+        >
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="tableListingDemoWrongUrl" xsi:type="array">
+                            <item name="component" xsi:type="string">Chernenko_Tables/js/view/listing</item>
+                            <item name="title" xsi:type="string" translate="true">Wrong fetch source URL</item>
+                            <item name="fetchSource" xsi:type="array">
+                                <item name="url" xsi:type="string">https://dummyjson.com/products2</item>
+                                <item name="external" xsi:type="boolean">true</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </block>
+    </body>
+</page>

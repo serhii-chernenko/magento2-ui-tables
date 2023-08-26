@@ -33,7 +33,11 @@
                     ">
                         <div data-bind="
                             class: `${rootHtmlClass}__skeleton-box ${rootHtmlClass}__skeleton-box--short`,
-                            css: { [`${rootHtmlClass}__skeleton-box--white`]: rowIndex() % 2 !== 1 }
+                            css: {
+                                [`${rootHtmlClass}__skeleton-box--white`]: rowIndex() % 2 !== 1,
+                                [`${rootHtmlClass}__skeleton-box--medium`]: columns[column].skeletonBoxSize === 'medium',
+                                [`${rootHtmlClass}__skeleton-box--large`]: columns[column].skeletonBoxSize === 'large'
+                            }
                         "></div>
                     </div>
                 <!-- /ko -->

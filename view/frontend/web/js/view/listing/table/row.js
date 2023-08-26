@@ -1,4 +1,8 @@
-define(['uiCollection', 'uiLayout'], (uiCollection, uiLayout) => {
+define(['uiCollection', 'uiLayout', 'Magento_Catalog/js/price-utils'], (
+    uiCollection,
+    uiLayout,
+    priceUtils
+) => {
     'use strict';
 
     return uiCollection.extend({
@@ -25,7 +29,7 @@ define(['uiCollection', 'uiLayout'], (uiCollection, uiLayout) => {
             this.cellsToRender = [];
             const { component, template } = this.components.default;
 
-            for (const cell of this.columns) {
+            for (const cell of this.renderedColumns) {
                 this.cellsToRender.push({
                     component,
                     template,
@@ -54,6 +58,10 @@ define(['uiCollection', 'uiLayout'], (uiCollection, uiLayout) => {
         getAdditionalConfig(cell, value, config = {}) {
             if (cell === 'details') {
                 config.label = this.detailsColumnLabel;
+            } else if (cell === 'price' && this.columns[cell]?.formatPrice) {
+                config.value = priceUtils.formatPriceLocale(this.row[cell], {
+                    pattern: '$%s'
+                });
             }
 
             return this.getComponentCellComponentAndTemplate(config, cell);
@@ -69,7 +77,12 @@ define(['uiCollection', 'uiLayout'], (uiCollection, uiLayout) => {
          * @returns {Object} Config object with collected properties.
          */
         getComponentCellComponentAndTemplate(config, cell) {
-            if (this.resolution === 'desktop' && cell === 'details') {
+            if (
+                cell === 'details' &&
+                (!this.needToMergeMobileColumns ||
+                    (this.resolution === 'desktop' &&
+                        this.needToMergeMobileColumns))
+            ) {
                 const { component, template } = this.components[cell];
 
                 config = {

@@ -1,0 +1,42 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <block name="table.listing.demo.without.actions"
+               class="Chernenko\Tables\Block\Listing"
+        >
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="tableListingDemoWithoutActions" xsi:type="array">
+                            <item name="component" xsi:type="string">Chernenko_Tables/js/view/listing</item>
+                            <item name="title" xsi:type="string" translate="true">Without actions</item>
+                            <item name="fetchSource" xsi:type="array">
+                                <item name="url" xsi:type="string">https://dummyjson.com/products</item>
+                                <item name="external" xsi:type="boolean">true</item>
+                                <item name="selectOnlyColumns" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="components" xsi:type="array">
+                                <item name="search" xsi:type="boolean">false</item>
+                                <item name="pagination" xsi:type="boolean">false</item>
+                            </item>
+                            <item name="limit" xsi:type="number">3</item>
+                            <item name="columns" xsi:type="array">
+                                <item name="title" xsi:type="array">
+                                    <item name="label" xsi:type="string" translate="true">Title</item>
+                                </item>
+                                <item name="description" xsi:type="array">
+                                    <item name="label" xsi:type="string" translate="true">Description</item>
+                                    <item name="hideOnMobile" xsi:type="boolean">true</item>
+                                </item>
+                                <item name="price" xsi:type="array">
+                                    <item name="label" xsi:type="string" translate="true">Price</item>
+                                    <item name="labelMobile" xsi:type="string" translate="true">$</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </block>
+    </body>
+</page>

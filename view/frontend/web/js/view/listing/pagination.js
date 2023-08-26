@@ -7,7 +7,7 @@ define([
 
     return uiElement.extend({
         defaults: {
-            showAllPagesWhenLessThan: 5,
+            showAllPagesWhenLessThan: 5, // set 0 to show all pages
             pagination: [],
             isPrevButtonVisible: false,
             isNextButtonVisible: false,
@@ -65,10 +65,16 @@ define([
             if (this.pages < 2) return this;
 
             this.showButtons();
-            this.pages > this.showAllPagesWhenLessThan ||
-            (this.resolution === 'mobile' && this.showAllPagesWhenLessThan > 3)
-                ? this.createComplicatedPagination()
-                : this.createSimplePagination();
+            if (
+                this.showAllPagesWhenLessThan !== 0 &&
+                (this.pages > this.showAllPagesWhenLessThan ||
+                    (this.resolution === 'mobile' &&
+                        this.showAllPagesWhenLessThan > 3))
+            ) {
+                this.createComplicatedPagination();
+            } else {
+                this.createSimplePagination();
+            }
         },
 
         /**

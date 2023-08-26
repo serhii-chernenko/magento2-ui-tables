@@ -10,6 +10,8 @@ define([
     return uiCollection.extend({
         defaults: {
             template: 'Chernenko_Tables/listing',
+            title: '', // has to be set in XML
+            skeletonDemo: false, // set true to render skeletons
             components: {
                 message: {
                     component: 'Chernenko_Tables/js/view/listing/message',
@@ -312,6 +314,10 @@ define([
         },
 
         buildApp() {
+            if (this.skeletonDemo) {
+                return this;
+            }
+
             if (!this.response?.products?.length) {
                 this.showMessage($t(`Have no products to show!`), 'warning');
 
@@ -331,6 +337,10 @@ define([
         },
 
         addSearchComponentToRenderQueue() {
+            if (!this.components.search) {
+                return this;
+            }
+
             this.componentsToRender.push({
                 ...this.components.search,
                 parent: this.name,
@@ -343,6 +353,10 @@ define([
         },
 
         addTableComponentToRenderQueue() {
+            if (!this.components.table) {
+                throw new Error('Table component is not defined!');
+            }
+
             this.componentsToRender.push({
                 ...this.components.table.general,
                 parent: this.name,
@@ -361,6 +375,10 @@ define([
         },
 
         addAmountComponentToRenderQueue() {
+            if (!this.components.amount) {
+                return this;
+            }
+
             this.componentsToRender.push({
                 ...this.components.amount,
                 parent: this.name,
@@ -373,6 +391,10 @@ define([
         },
 
         addPaginationComponentToRenderQueue() {
+            if (!this.components.pagination) {
+                return this;
+            }
+
             this.componentsToRender.push({
                 ...this.components.pagination,
                 parent: this.name,

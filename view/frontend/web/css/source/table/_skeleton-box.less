@@ -13,6 +13,7 @@
 & when (@media-common = true) {
 
     @{ui-listing__skeleton-box__selector} {
+        display: inline-block;
         width: 70%;
         min-width: 30px;
         max-width: 173px;
@@ -43,12 +44,17 @@
 
         &--short {
             width: 30px;
-            margin: 0 auto;
+            margin: 0;
         }
 
         &--medium {
             width: 100px;
             max-width: 70%;
+        }
+
+        &--large {
+            width: 100%;
+            max-width: 100%;
         }
     }
 

@@ -2,8 +2,22 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
       layout="1column"
 >
-    <update handle="table_listing_demo"/>
+    <update handle="table_listing_demo_all"/>
+    <update handle="table_listing_demo_without_actions"/>
+    <update handle="table_listing_demo_simple_pager"/>
+    <update handle="table_listing_demo_skeleton"/>
+    <update handle="table_listing_demo_wrong_url"/>
     <body>
-        <move element="table.listing.demo" destination="content" before="-"/>
+        <move element="table.listing.demo.all" destination="content" after="-"/>
+        <move element="table.listing.demo.without.actions" destination="content" after="-"/>
+        <move element="table.listing.demo.simple.pager" destination="content" after="-"/>
+        <move element="table.listing.demo.skeleton" destination="content" after="-"/>
+        <move element="table.listing.demo.wrong.url" destination="content" after="-"/>
+        <referenceContainer name="content">
+            <block name="chernenko.tables.info"
+                   template="Chernenko_Tables::info.phtml"
+                   before="-"
+            />
+        </referenceContainer>
     </body>
 </page>

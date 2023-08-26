@@ -3,6 +3,7 @@
     <module name="Chernenko_Tables">
         <sequence>
             <module name="Magento_Csp"/>
+            <module name="Magento_Catalog"/>
         </sequence>
     </module>
 </config>

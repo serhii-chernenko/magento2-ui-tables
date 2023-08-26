@@ -180,8 +180,10 @@ define(['uiCollection', 'uiLayout', 'mage/translate'], (
                 name: `row-${item.id}-${Date.now()}`,
                 row: item,
                 components: this.components.cell,
-                columns: this.renderedColumns,
+                columns: this.columns,
+                renderedColumns: this.renderedColumns,
                 resolution: this.resolution,
+                needToMergeMobileColumns: this.needToMergeMobileColumns,
                 detailsColumnLabel: this.detailsColumnLabel,
                 htmlClass: `${this.htmlClass}__row`,
                 tableHtmlClass: this.htmlClass
