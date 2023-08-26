@@ -1,6 +1,6 @@
 - name: Deploy the Chernenko_Tables module on VPS
   hosts: all
-  remote_user: root
+  remote_user: admin
   become: yes
   become_user: admin
   environment:
