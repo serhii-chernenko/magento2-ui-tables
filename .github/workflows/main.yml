@@ -22,7 +22,9 @@ jobs:
           playbook: main.yml
           directory: .ansible
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          inventory: ${{ secrets.INVENTORY }}
+          inventory: |
+            [all]
+            ${{ secrets.VPS }} address=localhost
           options: |
             -e GITHUB_REPO=${{ github.repository }}
             -e VPS_APP_PATH=/home/admin/apps/m246
