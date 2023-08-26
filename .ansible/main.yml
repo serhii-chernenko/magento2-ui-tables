@@ -3,7 +3,6 @@
   remote_user: admin
   become: yes
   become_user: admin
-  no_log: true
   environment:
     PATH: "/home/admin/tools/madock:{{ ansible_env.PATH }}"
   vars:
