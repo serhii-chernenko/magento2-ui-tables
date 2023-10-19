@@ -5,5 +5,4 @@
     dest: "{{ dir }}/app/code/Chernenko/Tables"
     single_branch: true
     version: main
-    accept_hostkey: true
     accept_newhostkey: true
