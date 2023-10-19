@@ -1,7 +1,9 @@
+-
 - name: Update the repo of Chernenko_Tables module on VPS
   git:
     repo: "git@github.com:{{ GITHUB_REPO }}.git"
-    dest: "{{ VPS_APP_PATH }}/app/code/Chernenko/Tables"
-    update: yes
-    single_branch: yes
+    dest: "{{ dir }}/app/code/Chernenko/Tables"
+    single_branch: true
     version: main
+    accept_hostkey: true
+    accept_newhostkey: true

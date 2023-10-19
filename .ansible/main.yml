@@ -1,12 +1,10 @@
 - name: Deploy the Chernenko_Tables module on VPS
   hosts: all
-  remote_user: admin
-  become: yes
-  become_user: admin
+  remote_user: inevix
   environment:
-    PATH: "/home/admin/tools/madock:{{ ansible_env.PATH }}"
+    PATH: "/home/inevix/tools/madock:{{ ansible_env.PATH }}"
   vars:
-    dir: "{{ VPS_APP_PATH }}"
+    dir: "/home/inevix/apps/m246"
     log_file: "{{ dir }}/var/log/build.txt"
     m2: "madock magento"
     build_commands:

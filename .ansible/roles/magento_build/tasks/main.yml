@@ -12,7 +12,7 @@
 - name: Run build commands and log output
   block:
     - name: Run build command
-      ansible.builtin.shell:
+      shell:
         cmd: "{{ m2 }} {{ item }}"
         chdir: "{{ dir }}"
       register: cmd_output
