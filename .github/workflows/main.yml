@@ -26,3 +26,4 @@ jobs:
             ${{ secrets.VPS }} address=localhost
           options: |
             -e GITHUB_REPO=${{ github.repository }}
+            -e ansible_port=${{ secrets.SSH_PORT }}
