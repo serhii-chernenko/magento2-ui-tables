@@ -2,9 +2,9 @@
   hosts: all
   remote_user: inevix
   environment:
-    PATH: "/home/inevix/tools/madock:{{ ansible_env.PATH }}"
+    PATH: "$HOME/tools/madock:{{ ansible_env.PATH }}"
   vars:
-    dir: "/home/inevix/apps/magento-ui-tables"
+    dir: "$HOME/apps/magento2-ui-tables"
     log_file: "{{ dir }}/var/log/build.txt"
     m2: "madock magento"
     build_commands:
