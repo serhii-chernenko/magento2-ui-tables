@@ -1,4 +1,9 @@
--
+- name: Ensure parent directory exists
+  ansible.builtin.file:
+    path: "{{ dir }}/app/code/Chernenko"
+    state: directory
+    recurse: yes
+    
 - name: Update the repo of Chernenko_Tables module on VPS
   git:
     repo: "git@github.com:{{ GITHUB_REPO }}.git"
@@ -6,3 +11,4 @@
     single_branch: true
     version: main
     accept_newhostkey: true
+    force: true
