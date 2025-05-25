@@ -1,3 +1,10 @@
+- name: Ensure log directory exists
+  file:
+    path: "{{ log_file | dirname }}"
+    state: directory
+    mode: '0755'
+    recurse: yes
+    
 - name: Clear log file
   file:
     path: "{{ log_file }}"
