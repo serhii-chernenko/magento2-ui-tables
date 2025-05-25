@@ -4,7 +4,7 @@
   environment:
     PATH: "/home/inevix/tools/madock:{{ ansible_env.PATH }}"
   vars:
-    dir: "/home/inevix/apps/m246"
+    dir: "/home/inevix/apps/magento-ui-tables"
     log_file: "{{ dir }}/var/log/build.txt"
     m2: "madock magento"
     build_commands:
